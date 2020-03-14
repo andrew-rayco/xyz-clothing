@@ -30,7 +30,7 @@ const relatedProds = [
 test('RelatedProducts renders correct amount of products', () => {
   const { getAllByTestId } = render(
     <Router>
-      <RelatedProducts relatedProds={relatedProds} />
+      <RelatedProducts relatedProds={relatedProds} userCurrency={'USD'} />
     </Router>
   )
   const actual = getAllByTestId('related')
@@ -40,7 +40,7 @@ test('RelatedProducts renders correct amount of products', () => {
 test('RelatedProducts renders correct products', () => {
   const { getByText } = render(
     <Router>
-      <RelatedProducts relatedProds={relatedProds} />
+      <RelatedProducts relatedProds={relatedProds} userCurrency={'USD'} />
     </Router>
   )
   let actual = getByText('Brown Shoes')

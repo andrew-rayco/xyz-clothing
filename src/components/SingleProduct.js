@@ -26,7 +26,10 @@ const SingleProduct = ({ productId, allProducts, userCurrency }) => {
       <p>Product ID: {id}</p>
 
       {relatedProductDetails ? (
-        <RelatedProducts relatedProds={relatedProductDetails} />
+        <RelatedProducts
+          relatedProds={relatedProductDetails}
+          userCurrency={userCurrency}
+        />
       ) : null}
 
       <Link to="/">Return to all products</Link>
