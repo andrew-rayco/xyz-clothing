@@ -32,7 +32,9 @@ const SingleProduct = ({ productId, allProducts, userCurrency }) => {
         />
       ) : null}
 
-      <Link to="/">Return to all products</Link>
+      <Link to="/">
+        <span>&lt;</span> Return to all products
+      </Link>
     </div>
   )
 }

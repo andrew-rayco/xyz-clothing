@@ -8,22 +8,27 @@ const RelatedProducts = ({ relatedProds, userCurrency }) => {
   return (
     <div className="related-products">
       <h3>Related Products</h3>
-      {relatedProds.map(prod => {
-        const { id, name, price } = prod
-        return (
-          <Link to={`/products/${id}`} key={name + id}>
-            <div data-testid="related">
-              <span>{name}</span>
-              <span>
-                {userCurrency}{' '}
-                {calculateLocalPrice(price.base, price.amount, userCurrency)}
-              </span>
-            </div>
-          </Link>
-        )
-      })}
+      {renderRelatedProds(relatedProds, userCurrency)}
     </div>
   )
+}
+
+const renderRelatedProds = (relatedProds, userCurrency) => {
+  return relatedProds.map(prod => {
+    const { id, name, price } = prod
+
+    return (
+      <Link to={`/products/${id}`} key={name + id}>
+        <div data-testid="related">
+          <span>{name}</span>
+          <span>
+            {userCurrency}{' '}
+            {calculateLocalPrice(price.base, price.amount, userCurrency)}
+          </span>
+        </div>
+      </Link>
+    )
+  })
 }
 
 RelatedProducts.propTypes = {
