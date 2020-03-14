@@ -6,12 +6,22 @@ import SingleProduct from './SingleProduct'
 
 import allProducts from './data/products.json'
 
-test('SingleProduct renders correct product data', () => {
+test('SingleProduct renders `Brown Shoes` product correctly', () => {
   const { getByText } = render(
     <Router>
       <SingleProduct allProducts={allProducts} productId={1} />
     </Router>
   )
   const expectedTitle = getByText('Brown Shoes')
+  expect(expectedTitle).toBeTruthy()
+})
+
+test('SingleProduct renders `Blue Shirt` product correctly', () => {
+  const { getByText } = render(
+    <Router>
+      <SingleProduct allProducts={allProducts} productId={5} />
+    </Router>
+  )
+  const expectedTitle = getByText('Blue Shirt')
   expect(expectedTitle).toBeTruthy()
 })
