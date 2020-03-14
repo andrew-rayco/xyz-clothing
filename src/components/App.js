@@ -6,7 +6,7 @@ import SingleProduct from './SingleProduct'
 
 import allProducts from '../data/products.json'
 
-export default () => (
+const App = () => (
   <Router>
     <div className="app">
       <h1>XYZ Clothing</h1>
@@ -29,3 +29,5 @@ export default () => (
     </div>
   </Router>
 )
+
+export default App
