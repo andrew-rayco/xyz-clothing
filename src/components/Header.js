@@ -8,17 +8,19 @@ const Header = ({ handleChange, userCurrency }) => {
       <Link to="/">
         <h1>XYZ Clothing</h1>
       </Link>
-      <label htmlFor="currency">Currency</label>
-      <select
-        name="currency"
-        id="currency"
-        onChange={handleChange}
-        value={userCurrency}
-      >
-        <option value="AUD">AUD</option>
-        <option value="USD">USD</option>
-        <option value="CNY">CNY</option>
-      </select>
+      <div>
+        <label htmlFor="currency">Currency</label>
+        <select
+          name="currency"
+          id="currency"
+          onChange={handleChange}
+          value={userCurrency}
+        >
+          <option value="AUD">AUD</option>
+          <option value="USD">USD</option>
+          <option value="CNY">CNY</option>
+        </select>
+      </div>
     </div>
   )
 }

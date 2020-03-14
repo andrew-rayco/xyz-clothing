@@ -28,9 +28,11 @@ h2 {
   font-size: 46px;
 }
 
-select {
-  background: $secondary;
-  border: 0;
-  padding: 0.5em;
-  margin-left: 0.5em;
+a {
+  text-decoration: none;
+  color: $bodyColor;
+
+  &:hover {
+    color: $primary;
+  }
 }

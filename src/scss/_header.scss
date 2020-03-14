@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid $primary;
+
+  select {
+    background: $secondary;
+    border: 0;
+    padding: 0.5em;
+    margin-left: 0.5em;
+    transition: all 0.15s linear;
+
+    &:hover {
+      background: $primary;
+      color: $bgColor;
+      transition: all 0.15s linear;
+    }
+  }
+}
