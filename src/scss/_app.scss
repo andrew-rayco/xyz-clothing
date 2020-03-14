@@ -11,6 +11,9 @@ body {
 .app {
   font-family: 'Libre Baskerville', serif;
   color: $bodyColor;
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 h1,

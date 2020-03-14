@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ProductList from './ProductList'
 import SingleProduct from './SingleProduct'
 import Header from './Header'
+import Footer from './Footer'
 
 import allProducts from '../data/products.json'
 import '../scss/index.scss'
@@ -52,6 +53,7 @@ class App extends Component {
               )}
             />
           </Switch>
+          <Footer />
         </div>
       </Router>
     )
