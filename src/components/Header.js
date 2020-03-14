@@ -1,17 +1,28 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const Header = () => {
+const Header = ({ handleChange, userCurrency }) => {
   return (
     <div className="header">
       <h1>XYZ Clothing</h1>
       <label htmlFor="currency">Currency</label>
-      <select name="currency" id="currency">
+      <select
+        name="currency"
+        id="currency"
+        onChange={handleChange}
+        value={userCurrency}
+      >
         <option value="AUD">AUD</option>
         <option value="USD">USD</option>
         <option value="CNY">CNY</option>
       </select>
     </div>
   )
+}
+
+Header.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  userCurrency: PropTypes.string.isRequired
 }
 
 export default Header

@@ -16,11 +16,19 @@ class App extends Component {
       selectedCurrency: 'AUD'
     }
   }
+
+  handleCurrencyChange(e) {
+    this.setState({ selectedCurrency: e.target.value })
+  }
+
   render() {
     return (
       <Router>
         <div className="app">
-          <Header />
+          <Header
+            handleChange={e => this.handleCurrencyChange(e)}
+            userCurrency={this.state.selectedCurrency}
+          />
           <Switch>
             <Route
               path="/products/:id"
