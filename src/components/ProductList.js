@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { calculateLocalPrice } from '../utils'
 
-const ProductList = ({ allProducts, userCurrency, calculateLocalPrice }) => {
+const ProductList = ({ allProducts, userCurrency }) => {
   return (
     <div className="product-list">
       <h2>All Products</h2>

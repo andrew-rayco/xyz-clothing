@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const Header = ({ handleChange, userCurrency }) => {
   return (
     <div className="header">
-      <h1>XYZ Clothing</h1>
+      <Link to="/">
+        <h1>XYZ Clothing</h1>
+      </Link>
       <label htmlFor="currency">Currency</label>
       <select
         name="currency"
