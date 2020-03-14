@@ -2,22 +2,22 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const ProductList = ({ products }) => {
+const ProductList = ({ allProducts }) => {
   return (
     <div className="product-list">
-      {products.map(product => renderProducts(product))}
+      {allProducts.map(singleProd => renderProducts(singleProd))}
     </div>
   )
 }
 
-const renderProducts = product => (
-  <Link to={`/products/${product.id}`} key={product.id}>
-    <div data-testid="single-product">{product.name}</div>
+const renderProducts = ({ name, id }) => (
+  <Link to={`/products/${id}`} key={id}>
+    <div data-testid="single-product">{name}</div>
   </Link>
 )
 
 ProductList.propTypes = {
-  products: PropTypes.array.isRequired
+  allProducts: PropTypes.array.isRequired
 }
 
 export default ProductList
