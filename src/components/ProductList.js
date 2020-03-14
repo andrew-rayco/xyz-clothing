@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { calculateLocalPrice } from '../utils'
 import { Link } from 'react-router-dom'
 
-const ProductList = ({ allProducts, userCurrency }) => {
+const ProductList = ({ allProducts, userCurrency, calculateLocalPrice }) => {
   return (
     <div className="product-list">
       <h2>All Products</h2>
@@ -11,11 +12,15 @@ const ProductList = ({ allProducts, userCurrency }) => {
   )
 }
 
-const renderProducts = ({ name, id }, userCurrency) => (
+const renderProducts = ({ name, id, price }, userCurrency) => (
   <Link to={`/products/${id}`} key={id}>
     <div data-testid="single-product">
       <span>{name}</span>
-      <span>{userCurrency}</span>
+      <span>
+        {' '}
+        - {userCurrency}{' '}
+        {calculateLocalPrice(price.base, price.amount, userCurrency)}
+      </span>
     </div>
   </Link>
 )
