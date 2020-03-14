@@ -16,7 +16,8 @@ const SingleProduct = ({ productId, allProducts }) => {
 }
 
 SingleProduct.propTypes = {
-  productId: PropTypes.number.isRequired
+  productId: PropTypes.number.isRequired,
+  allProducts: PropTypes.array.isRequired
 }
 
 export default SingleProduct
