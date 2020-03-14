@@ -9,7 +9,11 @@ const ProductList = ({ products }) => {
   )
 }
 
-const renderProducts = product => <div key={product.id}>{product.name}</div>
+const renderProducts = product => (
+  <div key={product.id} data-testid="single-product">
+    {product.name}
+  </div>
+)
 
 ProductList.propTypes = {
   products: PropTypes.array.isRequired
