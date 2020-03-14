@@ -34,9 +34,11 @@ h2 {
 a {
   text-decoration: none;
   color: $bodyColor;
+  transition: color 0.15s linear;
 
   &:hover {
     color: $primary;
+    transition: color 0.15s linear;
   }
 }
 

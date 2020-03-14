@@ -19,12 +19,12 @@ const renderRelatedProds = (relatedProds, userCurrency) => {
 
     return (
       <Link to={`/products/${id}`} key={name + id}>
-        <div data-testid="related">
-          <span>{name}</span>
-          <span>
-            {userCurrency}{' '}
+        <div className="related-product" data-testid="related">
+          <p>{name}</p>
+          <p>
+            <span>{userCurrency}</span>
             {calculateLocalPrice(price.base, price.amount, userCurrency)}
-          </span>
+          </p>
         </div>
       </Link>
     )

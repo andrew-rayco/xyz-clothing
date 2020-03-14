@@ -1,0 +1,25 @@
+.related-products {
+  background: darken($bgColor, 5);
+  padding: 1em;
+  margin: 2em 0;
+
+  p {
+    font-size: 1em;
+  }
+
+  h3 {
+    margin-bottom: 0.5em;
+  }
+
+  .related-product {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3em;
+
+    span {
+      font-size: 0.5em;
+      color: lighten($bodyColor, 30);
+      margin-right: 0.3em;
+    }
+  }
+}

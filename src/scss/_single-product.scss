@@ -4,6 +4,16 @@
     font-size: 1.3em;
   }
 
+  .home-link {
+    color: $primary;
+    transition: color 0.15s linear;
+
+    &:hover {
+      color: $secondary;
+      transition: color 0.15s linear;
+    }
+  }
+
   .price {
     font-size: 1.8em;
     margin-top: 0.5em;
