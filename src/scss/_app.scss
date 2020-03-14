@@ -1,11 +1,16 @@
+$bodyColor: #302419;
+$primary: #cc141c;
+$secondary: #d3c2b2;
+$bgColor: #f9f5f1;
+
 body {
-  background: #f9f5f1;
+  background: $bgColor;
   padding: 2em;
 }
 
 .app {
   font-family: 'Libre Baskerville', serif;
-  color: #302419;
+  color: $bodyColor;
 }
 
 h1,
@@ -15,9 +20,16 @@ h2 {
 
 h1 {
   font-size: 28px;
-  color: #cc141c;
+  color: $primary;
 }
 
 h2 {
   font-size: 46px;
+}
+
+select {
+  background: $secondary;
+  border: 0;
+  padding: 0.5em;
+  margin-left: 0.5em;
 }
