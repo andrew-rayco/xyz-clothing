@@ -1,0 +1,27 @@
+.single-product {
+  p,
+  a {
+    font-size: 1.3em;
+  }
+
+  .price {
+    font-size: 1.8em;
+    margin-top: 0.5em;
+
+    span {
+      font-size: 0.5em;
+      color: lighten($bodyColor, 30);
+      margin-right: 0.3em;
+    }
+  }
+
+  .product-id {
+    font-size: 0.8em;
+    color: lighten($bodyColor, 30);
+  }
+
+  .this-product {
+    display: flex;
+    justify-content: space-between;
+  }
+}

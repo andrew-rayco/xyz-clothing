@@ -17,13 +17,17 @@ const SingleProduct = ({ productId, allProducts, userCurrency }) => {
 
   return (
     <div className="single-product">
-      <h2>{name}</h2>
-      <p>{description}</p>
-      <p>
-        <span>{userCurrency}</span>{' '}
-        {calculateLocalPrice(price.base, price.amount, userCurrency)}
-      </p>
-      <p>Product ID: {id}</p>
+      <div className="this-product">
+        <div className="product-info">
+          <h2>{name}</h2>
+          <p>{description}</p>
+          <p className="product-id">Product # {id}</p>
+        </div>
+        <p className="price">
+          <span>{userCurrency}</span>{' '}
+          {calculateLocalPrice(price.base, price.amount, userCurrency)}
+        </p>
+      </div>
 
       {relatedProductDetails ? (
         <RelatedProducts
