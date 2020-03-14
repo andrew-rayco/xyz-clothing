@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import SingleProduct from './SingleProduct'
 
-import allProducts from './data/products.json'
+import allProducts from '../data/products.json'
 
 test('SingleProduct renders `Brown Shoes` product correctly', () => {
   const { getByText } = render(

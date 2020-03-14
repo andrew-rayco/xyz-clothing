@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ProductList from './ProductList'
 import SingleProduct from './SingleProduct'
 
-import allProducts from './data/products.json'
+import allProducts from '../data/products.json'
 
 export default () => (
   <Router>
