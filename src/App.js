@@ -14,7 +14,10 @@ export default () => (
         <Route
           path="/products/:id"
           component={({ match }) => (
-            <SingleProduct productId={parseInt(match.params.id)} />
+            <SingleProduct
+              productId={parseInt(match.params.id)}
+              allProducts={allProducts}
+            />
           )}
         />
         <Route
