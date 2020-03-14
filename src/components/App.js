@@ -5,6 +5,7 @@ import ProductList from './ProductList'
 import SingleProduct from './SingleProduct'
 
 import allProducts from '../data/products.json'
+import '../scss/index.scss'
 
 const App = () => (
   <Router>

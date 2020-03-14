@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 const ProductList = ({ allProducts }) => {
   return (
     <div className="product-list">
+      <h2>All Products</h2>
       {allProducts.map(singleProd => renderProducts(singleProd))}
     </div>
   )
