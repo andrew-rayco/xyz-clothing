@@ -5,5 +5,7 @@ Bootstrapped on the template project for the super lean [nano-react-app](https:/
 Clone the repo and cd into the `xyz-clothing` directory.
 
 `yarn` to install dependencies.
+
 `yarn start` will spawn a development server with a default port of `1234`.
+
 `yarn build` will output a production build in the `dist` directory.
