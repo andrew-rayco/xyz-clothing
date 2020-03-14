@@ -22,12 +22,13 @@ class App extends Component {
   }
 
   render() {
+    const { selectedCurrency } = this.state
     return (
       <Router>
         <div className="app">
           <Header
             handleChange={e => this.handleCurrencyChange(e)}
-            userCurrency={this.state.selectedCurrency}
+            userCurrency={selectedCurrency}
           />
           <Switch>
             <Route
@@ -42,7 +43,12 @@ class App extends Component {
             <Route
               path="/"
               exact
-              component={() => <ProductList allProducts={allProducts} />}
+              component={() => (
+                <ProductList
+                  allProducts={allProducts}
+                  userCurrency={selectedCurrency}
+                />
+              )}
             />
           </Switch>
         </div>

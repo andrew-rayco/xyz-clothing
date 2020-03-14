@@ -9,7 +9,7 @@ import allProducts from '../data/products.json'
 test('ProductList renders correct amount of products', () => {
   const { getAllByTestId } = render(
     <Router>
-      <ProductList allProducts={allProducts} />
+      <ProductList allProducts={allProducts} userCurrency={'USD'} />
     </Router>
   )
   const productArray = getAllByTestId('single-product')
