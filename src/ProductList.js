@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const ProductList = ({ products }) => {
   return (
@@ -10,9 +11,9 @@ const ProductList = ({ products }) => {
 }
 
 const renderProducts = product => (
-  <div key={product.id} data-testid="single-product">
-    {product.name}
-  </div>
+  <Link to={`/products/${product.id}`} key={product.id}>
+    <div data-testid="single-product">{product.name}</div>
+  </Link>
 )
 
 ProductList.propTypes = {
