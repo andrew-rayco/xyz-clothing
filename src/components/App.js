@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   handleCurrencyChange(e) {
-    this.setState({ selectedCurrency: e.target.value })
+    this.setState({ selectedCurrency: e.value })
   }
 
   render() {

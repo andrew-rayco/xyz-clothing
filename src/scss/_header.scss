@@ -4,19 +4,36 @@
   align-items: center;
   padding-bottom: 1em;
   margin-bottom: 2em;
-  border-bottom: 1px solid $primary;
+  border-bottom: 1px solid $secondary;
 
-  select {
+  // Styles for the react-select component with `classNamePrefix` prop given `rs`
+  // Refer: https://react-select.com/styles#using-classnames
+  .rs-container {
+    width: 120px;
+    border: none;
+    font-size: 0.9em;
+  }
+
+  .rs__control {
     background: $secondary;
-    border: 0;
-    padding: 0.5em;
-    margin-left: 0.5em;
-    transition: all 0.15s linear;
+    border: none;
+    border-radius: 0;
+    color: white;
+
+    &--is-focused {
+      box-shadow: none;
+    }
+  }
+
+  .rs__indicator {
+    color: $bodyColor;
 
     &:hover {
-      background: $primary;
-      color: $bgColor;
-      transition: all 0.15s linear;
+      color: $primary;
+    }
+
+    &-separator {
+      background-color: $bodyColor;
     }
   }
 }

@@ -1,6 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import Select from 'react-select'
+
+const selectOptions = [
+  { value: 'AUD', label: 'AUD' },
+  { value: 'USD', label: 'USD' },
+  { value: 'CNY', label: 'CNY' }
+]
 
 const Header = ({ handleChange, userCurrency }) => {
   return (
@@ -8,18 +15,14 @@ const Header = ({ handleChange, userCurrency }) => {
       <Link to="/">
         <h1>XYZ Clothing</h1>
       </Link>
-      <div>
-        <label htmlFor="currency">Currency</label>
-        <select
-          name="currency"
-          id="currency"
-          onChange={handleChange}
-          value={userCurrency}
-        >
-          <option value="AUD">AUD</option>
-          <option value="USD">USD</option>
-          <option value="CNY">CNY</option>
-        </select>
+      <div className="currency-select">
+        <Select
+          value={{ value: userCurrency, label: userCurrency }}
+          onChange={e => handleChange(e)}
+          options={selectOptions}
+          className={'rs-container'}
+          classNamePrefix={'rs'}
+        />
       </div>
     </div>
   )
