@@ -37,6 +37,7 @@ class App extends Component {
                 <SingleProduct
                   productId={parseInt(match.params.id)}
                   allProducts={allProducts}
+                  userCurrency={selectedCurrency}
                 />
               )}
             />

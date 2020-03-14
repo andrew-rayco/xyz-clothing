@@ -15,4 +15,8 @@ test('calculateLocalPrice rate calculations are correct', () => {
   expected = (123 * 0.21).toFixed(2)
   result = calculateLocalPrice('CNY', 123, 'AUD')
   expect(result).toEqual(expected)
+
+  // Convert 300 CNY to AUD
+  expected = (300 * 0.21).toFixed(2)
+  result = calculateLocalPrice('CNY', 300, 'AUD')
 })

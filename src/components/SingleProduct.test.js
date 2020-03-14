@@ -9,7 +9,11 @@ import allProducts from '../data/products.json'
 test('SingleProduct renders `Brown Shoes` product correctly', () => {
   const { getByText } = render(
     <Router>
-      <SingleProduct allProducts={allProducts} productId={1} />
+      <SingleProduct
+        allProducts={allProducts}
+        productId={1}
+        userCurrency={'AUD'}
+      />
     </Router>
   )
   const expectedTitle = getByText('Brown Shoes')
@@ -19,7 +23,11 @@ test('SingleProduct renders `Brown Shoes` product correctly', () => {
 test('SingleProduct renders `Blue Shirt` product correctly', () => {
   const { getByText } = render(
     <Router>
-      <SingleProduct allProducts={allProducts} productId={5} />
+      <SingleProduct
+        allProducts={allProducts}
+        productId={5}
+        userCurrency={'AUD'}
+      />
     </Router>
   )
   const expectedTitle = getByText('Blue Shirt')
