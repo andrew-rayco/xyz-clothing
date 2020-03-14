@@ -8,7 +8,9 @@ const ProductList = ({ allProducts, userCurrency }) => {
   return (
     <div className="product-list">
       <h2>All Products</h2>
-      {renderProducts(allProducts, userCurrency)}
+      <div className="products">
+        {renderProducts(allProducts, userCurrency)}
+      </div>
     </div>
   )
 }
@@ -19,13 +21,12 @@ const renderProducts = (allProducts, userCurrency) => {
 
     return (
       <Link to={`/products/${id}`} key={id}>
-        <div data-testid="single-product">
-          <span>{name}</span>
-          <span>
-            {' '}
-            - {userCurrency}{' '}
+        <div className="single-product" data-testid="single-product">
+          <p>{name}</p>
+          <p>
+            <span>{userCurrency}</span>
             {calculateLocalPrice(price.base, price.amount, userCurrency)}
-          </span>
+          </p>
         </div>
       </Link>
     )

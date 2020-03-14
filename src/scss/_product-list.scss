@@ -1,0 +1,31 @@
+.product-list {
+  h2 {
+    margin-bottom: 0.5em;
+  }
+
+  .products {
+    font-size: 1.2em;
+
+    a div {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5em;
+
+      &:hover {
+        outline: 1px solid $secondary;
+      }
+    }
+
+    a:nth-of-type(odd) {
+      div {
+        background: lighten($secondary, 15);
+      }
+    }
+
+    span {
+      font-size: 0.5em;
+      margin-right: 0.5em;
+      color: lighten($bodyColor, 30);
+    }
+  }
+}
