@@ -9,7 +9,7 @@ const RelatedProducts = ({ relatedProds }) => {
       {relatedProds.map(prod => {
         return (
           <Link to={`/products/${prod.id}`} key={prod.name + prod.id}>
-            <div>{prod.name}</div>
+            <div data-testid="related">{prod.name}</div>
           </Link>
         )
       })}
