@@ -6,6 +6,8 @@ $bgColor: #f9f5f1;
 body {
   background: $bgColor;
   padding: 2em;
+  display: flex;
+  justify-content: center;
 }
 
 .app {
@@ -13,7 +15,6 @@ body {
   color: $bodyColor;
   width: 90vw;
   max-width: 800px;
-  margin: 0 auto;
 }
 
 h1,
