@@ -96,7 +96,15 @@ class EditForm extends Component {
               base: value,
               amount: newPrice
             }
-          }
+          },
+          isValid: {
+            ...this.state.isValid,
+            price: {
+              ...this.state.isValid.price,
+              [name]: isValid
+            }
+          },
+          submitDisabled: !isValid
         })
       } else {
         this.setState({
@@ -235,7 +243,9 @@ class EditForm extends Component {
                   value={{ label: price.base }}
                   onChange={e => this.handleChange(e, 'price-base')}
                   options={selectOptions}
-                  className="rs-container"
+                  className={
+                    isValid.price.base ? 'rs-container' : 'rs-container error'
+                  }
                   classNamePrefix="rs"
                   name="price-amount"
                   onMenuOpen={() =>
