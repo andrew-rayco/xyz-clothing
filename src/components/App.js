@@ -15,16 +15,35 @@ class App extends Component {
     super()
 
     this.state = {
-      selectedCurrency: 'AUD'
+      selectedCurrency: 'AUD',
+      products: []
     }
   }
+
+  componentDidMount() {
+    this.setState({
+      products: this.getLocalProducts() || allProducts
+    })
+  }
+
+  getLocalProducts() {
+    return JSON.parse(localStorage.getItem('allProducts'))
+  }
+
+  // setLocalProducts(data) {
+  //   localStorage.setItem('allProducts', JSON.stringify(data))
+  // }
+
+  // updateProductData(data) {
+  //   this.setState({ products: data }), setLocalProducts(data)
+  // }
 
   handleCurrencyChange(e) {
     this.setState({ selectedCurrency: e.value })
   }
 
   render() {
-    const { selectedCurrency } = this.state
+    const { selectedCurrency, products } = this.state
     return (
       <Router>
         <div className="app">
@@ -38,7 +57,7 @@ class App extends Component {
               component={({ match }) => (
                 <EditForm
                   productId={parseInt(match.params.id)}
-                  allProducts={allProducts}
+                  allProducts={products}
                   userCurrency={selectedCurrency}
                 />
               )}

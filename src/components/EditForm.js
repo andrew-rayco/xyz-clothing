@@ -5,14 +5,15 @@ class EditForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: 0,
+      id: '',
       name: '',
       description: '',
       price: {
         base: '',
-        amount: 0
+        amount: ''
       },
-      relatedProducts: []
+      relatedProducts: [],
+      productIndex: ''
     }
   }
 
@@ -20,10 +21,23 @@ class EditForm extends Component {
     const { productId, allProducts } = this.props
     const thisProduct = this.findProduct(productId, allProducts)
     this.setState({ ...thisProduct })
-    console.log(thisProduct)
+    const thisIndex = this.findIndex(productId, allProducts)
+
+    this.setState({ ...thisProduct, productIndex: thisIndex })
   }
 
-  findProduct = (productId, allProducts) => {
+  findIndex(productId, allProducts) {
+    let productIndex
+
+    allProducts.map((prod, i) => {
+      if (prod.id === productId) {
+        productIndex = i
+      }
+    })
+    return productIndex
+  }
+
+  findProduct(productId, allProducts) {
     return allProducts.find(prod => prod.id === productId)
   }
 
@@ -40,13 +54,13 @@ class EditForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('A form was submitted: ' + this.state)
+    console.log('submitted' + this.state)
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={() => this.handleSubmit()}>
+        <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group">
             <label htmlFor="id">id</label>
             <input
