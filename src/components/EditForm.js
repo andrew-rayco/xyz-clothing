@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 
+import RelatedEdit from './RelatedEdit'
+
 import { calculateLocalPrice } from '../utils'
 
 const selectOptions = [
@@ -212,15 +214,19 @@ class EditForm extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="related">Related</label>
-                <input
+                <label htmlFor="related">Related Products</label>
+                {/* <input
                   name="related"
                   type="text"
                   value={relatedProducts}
                   onChange={e => this.handleChange(e)}
                   placeholder="Select related"
-                />
+                /> */}
               </div>
+              <RelatedEdit
+                allProducts={this.props.allProducts}
+                relatedProducts={relatedProducts}
+              />
             </div>
             <div className="form-right">
               <div className="form-group">
@@ -250,7 +256,7 @@ class EditForm extends Component {
                   name="price-amount"
                   onMenuOpen={() =>
                     console.log(
-                      'Non-passive violations (in Chrome) courtesy of `react-select` dependency.\nRefer https://github.com/JedWatson/react-select/issues/2729'
+                      'Non-passive violations (in Chrome) courtesy of `react-select` dependency. They irk me. I am irked.\nRefer https://github.com/JedWatson/react-select/issues/2729'
                     )
                   }
                 />
