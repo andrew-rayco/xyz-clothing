@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import ProductList from './ProductList'
 import SingleProduct from './SingleProduct'
 import Header from './Header'
+import EditForm from './EditForm'
 import Footer from './Footer'
 
 import allProducts from '../data/products.json'
@@ -32,6 +33,16 @@ class App extends Component {
             userCurrency={selectedCurrency}
           />
           <Switch>
+            <Route
+              path="/products/:id/edit"
+              component={({ match }) => (
+                <EditForm
+                  productId={parseInt(match.params.id)}
+                  allProducts={allProducts}
+                  userCurrency={selectedCurrency}
+                />
+              )}
+            />
             <Route
               path="/products/:id"
               component={({ match }) => (
