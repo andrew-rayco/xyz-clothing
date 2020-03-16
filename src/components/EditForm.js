@@ -27,6 +27,7 @@ class EditForm extends Component {
       },
       productIndex: '',
       isValid: {
+        id: true,
         name: true
       },
       submitDisabled: false
@@ -38,7 +39,10 @@ class EditForm extends Component {
     const thisProduct = this.findProduct(productId, allProducts)
     const thisIndex = this.findIndex(productId, allProducts)
 
-    this.setState({ product: { ...thisProduct }, productIndex: thisIndex })
+    this.setState({
+      product: { ...thisProduct },
+      productIndex: thisIndex
+    })
   }
 
   // Since product id can be changed by user, we need the index for the
@@ -91,7 +95,7 @@ class EditForm extends Component {
       name = target.name
       value = name === 'id' ? parseInt(target.value) : target.value
 
-      const isValid = this.validateInput(name, value)
+      const isValid = this.validateInput(name, value, this.props.allProducts)
 
       this.setState({
         product: {
@@ -99,6 +103,7 @@ class EditForm extends Component {
           [name]: value
         },
         isValid: {
+          ...this.state.isValid,
           [name]: isValid
         },
         submitDisabled: !isValid
@@ -107,9 +112,20 @@ class EditForm extends Component {
     }
   }
 
-  validateInput(name, value) {
+  validateInput(name, value, allProducts) {
+    // Validate name
     if (name === 'name') {
       return value.length >= 3
+
+      // Validate id
+    } else if (name === 'id') {
+      let valid = true
+      allProducts.forEach(prod => {
+        if (prod.id === value && value !== this.props.productId) {
+          valid = false
+        }
+      })
+      return valid
     }
   }
 
@@ -195,15 +211,21 @@ class EditForm extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="id">id</label>
+                <label htmlFor="id">Id</label>
                 <input
                   type="number"
                   name="id"
                   value={id}
                   onChange={e => this.handleChange(e)}
                   placeholder="id"
+                  className={isValid.id ? '' : 'error'}
                 />
               </div>
+              {isValid.id ? (
+                ''
+              ) : (
+                <p className="error-text">Id must be unique</p>
+              )}
             </div>
           </div>
           <input
