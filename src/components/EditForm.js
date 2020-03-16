@@ -76,24 +76,38 @@ class EditForm extends Component {
     let name, value
     if (selectName) {
       // Handles select-react output from currency dropdown list
-      name = selectName.split('-')[1]
-      value = e.value
-      const { base, amount } = this.state.product.price
-      const newPrice = calculateLocalPrice(base, parseInt(amount), value)
 
-      this.setState({
-        product: {
-          ...this.state.product,
-          price: {
-            base: value,
-            amount: newPrice
+      name = selectName.split('-')[1]
+      value = e.value || parseFloat(e.target.value)
+
+      if (name === 'base') {
+        const { base, amount } = this.state.product.price
+        const newPrice = calculateLocalPrice(base, parseFloat(amount), value)
+
+        this.setState({
+          product: {
+            ...this.state.product,
+            price: {
+              base: value,
+              amount: newPrice
+            }
           }
-        }
-      })
+        })
+      } else {
+        this.setState({
+          product: {
+            ...this.state.product,
+            price: {
+              ...this.state.product.price,
+              amount: parseFloat(value)
+            }
+          }
+        })
+      }
       console.log('Change detected. State updated ' + name + ' = ' + value)
     } else {
       name = target.name
-      value = name === 'id' ? parseInt(target.value) : target.value
+      value = name === 'id' ? parseFloat(target.value) : target.value
 
       const isValid = this.validateInput(name, value, this.props.allProducts)
 
@@ -146,7 +160,7 @@ class EditForm extends Component {
           <div className="form-fields">
             <div className="form-left">
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Name*</label>
                 <input
                   name="name"
                   type="text"
@@ -185,17 +199,17 @@ class EditForm extends Component {
             </div>
             <div className="form-right">
               <div className="form-group">
-                <label htmlFor="price-amount">Price Amount</label>
+                <label htmlFor="price-amount">Price Amount*</label>
                 <input
                   name="price-amount"
                   type="number"
-                  value={parseInt(price.amount).toFixed(2)}
-                  onChange={e => this.handleChange(e)}
+                  value={price.amount}
+                  onChange={e => this.handleChange(e, 'price-amount')}
                   placeholder="Price amount"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="price-amount">Price Base</label>
+                <label htmlFor="price-amount">Price Base*</label>
                 <Select
                   value={{ label: price.base }}
                   onChange={e => this.handleChange(e, 'price-base')}
@@ -211,7 +225,7 @@ class EditForm extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="id">Id</label>
+                <label htmlFor="id">Id*</label>
                 <input
                   type="number"
                   name="id"
