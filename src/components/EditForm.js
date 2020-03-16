@@ -66,13 +66,11 @@ class EditForm extends Component {
 
   handleChange(e, selectName) {
     const { target } = e
-
     let name, value
     if (selectName) {
       // Handles select-react output from currency dropdown list
       name = selectName.split('-')[1]
       value = e.value
-
       this.setState({
         product: {
           ...this.state.product,
@@ -83,30 +81,10 @@ class EditForm extends Component {
     } else {
       name = target.name
       value = name === 'id' ? parseInt(target.value) : target.value
+
+      this.setState({ product: { ...this.state.product, [name]: value } })
+      console.log('Change detected. State updated ' + name + ' = ' + value)
     }
-
-    this.setState({
-      product: {
-        ...this.state.product,
-        [name]: value
-      }
-    })
-    console.log('Change detected. State updated ' + name + ' = ' + value)
-  }
-
-  handleSelect(e) {
-    const { base, amount } = this.state.product.price
-    const value = e.value
-    const newPrice = calculateLocalPrice(base, parseInt(amount), value)
-
-    this.setState({
-      product: {
-        price: {
-          base: value,
-          price: newPrice
-        }
-      }
-    })
   }
 
   handleSubmit(e) {
@@ -118,6 +96,7 @@ class EditForm extends Component {
 
   render() {
     const { id, name, description, price, relatedProducts } = this.state.product
+
     return (
       <div className="edit-form">
         <h2>Edit {name}</h2>
@@ -134,7 +113,6 @@ class EditForm extends Component {
                   placeholder="Name"
                 />
               </div>
-
               <div className="form-group">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -146,7 +124,6 @@ class EditForm extends Component {
                   rows="3"
                 />
               </div>
-
               <div className="form-group">
                 <label htmlFor="related">Related</label>
                 <input
@@ -158,19 +135,17 @@ class EditForm extends Component {
                 />
               </div>
             </div>
-
             <div className="form-right">
               <div className="form-group">
                 <label htmlFor="price-amount">Price Amount</label>
                 <input
                   name="price-amount"
                   type="number"
-                  value={price.amount}
+                  value={parseInt(price.amount).toFixed(2)}
                   onChange={e => this.handleChange(e)}
                   placeholder="Price amount"
                 />
               </div>
-
               <div className="form-group">
                 <label htmlFor="price-base">Price Base</label>
                 <Select
@@ -182,7 +157,6 @@ class EditForm extends Component {
                   name="price-base"
                 />
               </div>
-
               <div className="form-group">
                 <label htmlFor="id">id</label>
                 <input
@@ -195,15 +169,13 @@ class EditForm extends Component {
               </div>
             </div>
           </div>
-          <p>Related products select field?</p>
           <input type="submit" value="Submit" />
         </form>
-
         <div className="edit-links">
-          <Link to="/">
+          <Link to="/" className="home-link">
             <span>&lt;</span> Return to all products
           </Link>
-          <Link to={`/products/${this.props.productId}`}>
+          <Link to={`/products/${this.props.productId}`} className="home-link">
             View this product <span>&gt;</span>
           </Link>
         </div>
