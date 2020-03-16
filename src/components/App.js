@@ -30,9 +30,9 @@ class App extends Component {
     return JSON.parse(localStorage.getItem('allProducts'))
   }
 
-  // setLocalProducts(data) {
-  //   localStorage.setItem('allProducts', JSON.stringify(data))
-  // }
+  setLocalProducts(data) {
+    localStorage.setItem('allProducts', JSON.stringify(data))
+  }
 
   // updateProductData(data) {
   //   this.setState({ products: data }), setLocalProducts(data)
@@ -59,6 +59,7 @@ class App extends Component {
                   productId={parseInt(match.params.id)}
                   allProducts={products}
                   userCurrency={selectedCurrency}
+                  setLocalProducts={this.setLocalProducts}
                 />
               )}
             />

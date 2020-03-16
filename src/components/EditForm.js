@@ -5,12 +5,14 @@ class EditForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: '',
-      name: '',
-      description: '',
-      price: {
-        base: '',
-        amount: ''
+      product: {
+        id: '',
+        name: '',
+        description: '',
+        price: {
+          base: '',
+          amount: ''
+        }
       },
       relatedProducts: [],
       productIndex: ''
@@ -20,10 +22,9 @@ class EditForm extends Component {
   componentDidMount() {
     const { productId, allProducts } = this.props
     const thisProduct = this.findProduct(productId, allProducts)
-    this.setState({ ...thisProduct })
     const thisIndex = this.findIndex(productId, allProducts)
 
-    this.setState({ ...thisProduct, productIndex: thisIndex })
+    this.setState({ product: { ...thisProduct }, productIndex: thisIndex })
   }
 
   findIndex(productId, allProducts) {
@@ -41,23 +42,39 @@ class EditForm extends Component {
     return allProducts.find(prod => prod.id === productId)
   }
 
+  // replace product in allProducts by index
+  mergeProducts() {
+    const { productIndex, product } = this.state
+    const products = this.props.allProducts
+    products[productIndex] = product
+
+    return products
+  }
+
   handleChange(e) {
     const { target } = e
     const name = target.name
     const value = name === 'id' ? parseInt(target.value) : target.value
 
     this.setState({
-      [name]: value
+      product: {
+        ...this.state.product,
+        [name]: value
+      }
     })
     console.log('Change detected. State updated ' + name + ' = ' + value)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log('submitted' + this.state)
+    const newAllProducts = this.mergeProducts()
+    // send to localStorage
+    // clear state or redirect?
+    console.log('submitted', this.state)
   }
 
   render() {
+    const { id, name, description, price } = this.state.product
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
@@ -66,7 +83,7 @@ class EditForm extends Component {
             <input
               type="number"
               name="id"
-              value={this.state.id}
+              value={id}
               onChange={e => this.handleChange(e)}
               placeholder="id"
             />
@@ -76,7 +93,7 @@ class EditForm extends Component {
             <input
               name="name"
               type="text"
-              value={this.state.name}
+              value={name}
               onChange={e => this.handleChange(e)}
               placeholder="Name"
             />
@@ -86,7 +103,7 @@ class EditForm extends Component {
             <textarea
               name="description"
               type="text"
-              value={this.state.description}
+              value={description}
               onChange={e => this.handleChange(e)}
               placeholder="Description"
             />
@@ -96,7 +113,7 @@ class EditForm extends Component {
             <input
               name="price-amount"
               type="number"
-              value={this.state.price.amount}
+              value={price.amount}
               onChange={e => this.handleChange(e)}
               placeholder="Price amount"
             />
@@ -105,7 +122,7 @@ class EditForm extends Component {
             <input
               name="price-base"
               type="text"
-              value={this.state.price.base}
+              value={price.base}
               onChange={e => this.handleChange(e)}
               placeholder="Base price currency"
             />
@@ -121,7 +138,8 @@ class EditForm extends Component {
 EditForm.propTypes = {
   productId: PropTypes.number.isRequired,
   allProducts: PropTypes.array.isRequired,
-  userCurrency: PropTypes.string.isRequired
+  userCurrency: PropTypes.string.isRequired,
+  setLocalProducts: PropTypes.func.isRequired
 }
 
 export default EditForm
