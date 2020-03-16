@@ -9,3 +9,5 @@ Clone the repo and cd into the `xyz-clothing` directory.
 `yarn start` will spawn a development server with a default port of `1234`.
 
 `yarn build` will output a production build in the `dist` directory.
+
+`yarn test` will run unit tests.
