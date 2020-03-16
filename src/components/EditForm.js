@@ -71,10 +71,24 @@ class EditForm extends Component {
       // Handles select-react output from currency dropdown list
       name = selectName.split('-')[1]
       value = e.value
+      console.log(name, value)
+
+      const { base, amount } = this.state.product.price
+      const newPrice = calculateLocalPrice(base, parseInt(amount), value)
+
       this.setState({
         product: {
           ...this.state.product,
           price: { ...this.state.product.price, [name]: value }
+        }
+      })
+      this.setState({
+        product: {
+          ...this.state.product,
+          price: {
+            base: value,
+            amount: newPrice
+          }
         }
       })
       console.log('Change detected. State updated ' + name + ' = ' + value)
@@ -141,7 +155,7 @@ class EditForm extends Component {
                 <input
                   name="price-amount"
                   type="number"
-                  value={parseInt(price.amount).toFixed(2)}
+                  value={price.amount}
                   onChange={e => this.handleChange(e)}
                   placeholder="Price amount"
                 />
