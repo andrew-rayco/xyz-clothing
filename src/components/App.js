@@ -22,21 +22,28 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      products: this.getLocalProducts() || allProducts
+      products: this.getLocalProducts()
     })
   }
 
+  // Checks localStorage for existing product data.
+  // If none, initiates localStorage, assigns raw product data
+  // and returns raw products to be added to state.
   getLocalProducts() {
-    return JSON.parse(localStorage.getItem('allProducts'))
+    const localData = localStorage.getItem('allProducts')
+    if (localData !== 'undefined' && localData !== null) {
+      return JSON.parse(localData)
+    } else {
+      localStorage.setItem('allProducts', JSON.stringify(allProducts))
+      return allProducts
+    }
   }
 
-  setLocalProducts(data) {
+  // Updates localStorage and state
+  updateProducts = data => {
     localStorage.setItem('allProducts', JSON.stringify(data))
+    this.setState({ products: data })
   }
-
-  // updateProductData(data) {
-  //   this.setState({ products: data }), setLocalProducts(data)
-  // }
 
   handleCurrencyChange(e) {
     this.setState({ selectedCurrency: e.value })
@@ -59,7 +66,7 @@ class App extends Component {
                   productId={parseInt(match.params.id)}
                   allProducts={products}
                   userCurrency={selectedCurrency}
-                  setLocalProducts={this.setLocalProducts}
+                  updateProducts={this.updateProducts}
                 />
               )}
             />
@@ -68,7 +75,7 @@ class App extends Component {
               component={({ match }) => (
                 <SingleProduct
                   productId={parseInt(match.params.id)}
-                  allProducts={allProducts}
+                  allProducts={products}
                   userCurrency={selectedCurrency}
                 />
               )}
@@ -78,7 +85,7 @@ class App extends Component {
               exact
               component={() => (
                 <ProductList
-                  allProducts={allProducts}
+                  allProducts={products}
                   userCurrency={selectedCurrency}
                 />
               )}

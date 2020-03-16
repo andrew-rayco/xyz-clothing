@@ -27,6 +27,8 @@ class EditForm extends Component {
     this.setState({ product: { ...thisProduct }, productIndex: thisIndex })
   }
 
+  // Since product id can be changed by user, we need the index of the
+  // product we're editing to return the updated product to array.
   findIndex(productId, allProducts) {
     let productIndex
 
@@ -43,6 +45,7 @@ class EditForm extends Component {
   }
 
   // replace product in allProducts by index
+  // i.e. Putting it back where we found it.
   mergeProducts() {
     const { productIndex, product } = this.state
     const products = this.props.allProducts
@@ -68,8 +71,10 @@ class EditForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     const newAllProducts = this.mergeProducts()
-    // send to localStorage
-    // clear state or redirect?
+    // Sends to localStorage and Application state.
+    this.props.updateProducts(newAllProducts)
+
+    // TODO: clear state or redirect?
     console.log('submitted', this.state)
   }
 
@@ -139,7 +144,7 @@ EditForm.propTypes = {
   productId: PropTypes.number.isRequired,
   allProducts: PropTypes.array.isRequired,
   userCurrency: PropTypes.string.isRequired,
-  setLocalProducts: PropTypes.func.isRequired
+  updateProducts: PropTypes.func.isRequired
 }
 
 export default EditForm
