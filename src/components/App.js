@@ -75,7 +75,7 @@ class App extends Component {
               component={({ match }) => (
                 <SingleProduct
                   productId={parseInt(match.params.id)}
-                  allProducts={products}
+                  allProducts={this.getLocalProducts()}
                   userCurrency={selectedCurrency}
                 />
               )}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 class EditForm extends Component {
@@ -74,14 +75,13 @@ class EditForm extends Component {
     // Sends to localStorage and Application state.
     this.props.updateProducts(newAllProducts)
 
-    // TODO: clear state or redirect?
-    console.log('submitted', this.state)
+    this.props.history.push('/')
   }
 
   render() {
     const { id, name, description, price } = this.state.product
     return (
-      <div>
+      <div className="edit-form">
         <form onSubmit={e => this.handleSubmit(e)}>
           <div className="form-group">
             <label htmlFor="id">id</label>
@@ -93,6 +93,7 @@ class EditForm extends Component {
               placeholder="id"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
@@ -103,6 +104,7 @@ class EditForm extends Component {
               placeholder="Name"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="description">Description</label>
             <textarea
@@ -113,6 +115,7 @@ class EditForm extends Component {
               placeholder="Description"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="price-amount">Price Amount</label>
             <input
@@ -135,6 +138,15 @@ class EditForm extends Component {
           <p>Related products select field?</p>
           <input type="submit" value="Submit" />
         </form>
+
+        <div className="edit-links">
+          <Link to="/">
+            <span>&lt;</span> Return to all products
+          </Link>
+          <Link to={`/products/${this.props.productId}`}>
+            View this product <span>&gt;</span>
+          </Link>
+        </div>
       </div>
     )
   }
@@ -147,4 +159,4 @@ EditForm.propTypes = {
   updateProducts: PropTypes.func.isRequired
 }
 
-export default EditForm
+export default withRouter(EditForm)
