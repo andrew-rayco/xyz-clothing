@@ -21,13 +21,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // localStorage.clear()
     this.setState({
       products: this.getLocalProducts()
     })
   }
 
   // Checks localStorage for existing product data.
-  // If none, initiates localStorage, assigns raw product data
+  // If none, initiates localStorage with raw products data
   // and returns raw products to be added to state.
   getLocalProducts() {
     const localData = localStorage.getItem('allProducts')
@@ -39,7 +40,7 @@ class App extends Component {
     }
   }
 
-  // Updates localStorage and state
+  // Updates localStorage and state.
   updateProducts = data => {
     localStorage.setItem('allProducts', JSON.stringify(data))
     this.setState({ products: data })
@@ -51,6 +52,7 @@ class App extends Component {
 
   render() {
     const { selectedCurrency, products } = this.state
+
     return (
       <Router>
         <div className="app">
@@ -64,8 +66,8 @@ class App extends Component {
               component={({ match }) => (
                 <EditForm
                   productId={parseInt(match.params.id)}
-                  allProducts={products}
                   userCurrency={selectedCurrency}
+                  allProducts={products}
                   updateProducts={this.updateProducts}
                 />
               )}

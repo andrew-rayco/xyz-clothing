@@ -25,7 +25,11 @@ class EditForm extends Component {
         },
         relatedProducts: []
       },
-      productIndex: ''
+      productIndex: '',
+      isValid: {
+        name: true
+      },
+      submitDisabled: false
     }
   }
 
@@ -37,7 +41,7 @@ class EditForm extends Component {
     this.setState({ product: { ...thisProduct }, productIndex: thisIndex })
   }
 
-  // Since product id can be changed by user, we need the index of the
+  // Since product id can be changed by user, we need the index for the
   // product we're editing to return the updated product to array.
   findIndex(productId, allProducts) {
     let productIndex
@@ -54,8 +58,7 @@ class EditForm extends Component {
     return allProducts.find(prod => prod.id === productId)
   }
 
-  // replace product in allProducts by index
-  // i.e. Putting it back where we found it.
+  // Puts the edited product back where we found it.
   mergeProducts() {
     const { productIndex, product } = this.state
     const products = this.props.allProducts
@@ -71,17 +74,9 @@ class EditForm extends Component {
       // Handles select-react output from currency dropdown list
       name = selectName.split('-')[1]
       value = e.value
-      console.log(name, value)
-
       const { base, amount } = this.state.product.price
       const newPrice = calculateLocalPrice(base, parseInt(amount), value)
 
-      this.setState({
-        product: {
-          ...this.state.product,
-          price: { ...this.state.product.price, [name]: value }
-        }
-      })
       this.setState({
         product: {
           ...this.state.product,
@@ -96,8 +91,25 @@ class EditForm extends Component {
       name = target.name
       value = name === 'id' ? parseInt(target.value) : target.value
 
-      this.setState({ product: { ...this.state.product, [name]: value } })
+      const isValid = this.validateInput(name, value)
+
+      this.setState({
+        product: {
+          ...this.state.product,
+          [name]: value
+        },
+        isValid: {
+          [name]: isValid
+        },
+        submitDisabled: !isValid
+      })
       console.log('Change detected. State updated ' + name + ' = ' + value)
+    }
+  }
+
+  validateInput(name, value) {
+    if (name === 'name') {
+      return value.length >= 3
     }
   }
 
@@ -110,7 +122,7 @@ class EditForm extends Component {
 
   render() {
     const { id, name, description, price, relatedProducts } = this.state.product
-
+    const { isValid } = this.state
     return (
       <div className="edit-form">
         <h2>Edit {name}</h2>
@@ -125,7 +137,13 @@ class EditForm extends Component {
                   value={name}
                   onChange={e => this.handleChange(e)}
                   placeholder="Name"
+                  className={isValid.name ? '' : 'error'}
                 />
+                {isValid.name ? null : (
+                  <p className="error-text">
+                    Name must be longer than 3 characters
+                  </p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="description">Description</label>
@@ -155,25 +173,25 @@ class EditForm extends Component {
                 <input
                   name="price-amount"
                   type="number"
-                  value={price.amount}
+                  value={parseInt(price.amount).toFixed(2)}
                   onChange={e => this.handleChange(e)}
                   placeholder="Price amount"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="price-base">Price Base</label>
+                <label htmlFor="price-amount">Price Base</label>
                 <Select
                   value={{ label: price.base }}
                   onChange={e => this.handleChange(e, 'price-base')}
                   options={selectOptions}
                   className="rs-container"
                   classNamePrefix="rs"
-                  name="price-base"
-                  onMenuOpen={() => {
+                  name="price-amount"
+                  onMenuOpen={() =>
                     console.log(
                       'Non-passive violations (in Chrome) courtesy of `react-select` dependency.\nRefer https://github.com/JedWatson/react-select/issues/2729'
                     )
-                  }}
+                  }
                 />
               </div>
               <div className="form-group">
@@ -188,7 +206,11 @@ class EditForm extends Component {
               </div>
             </div>
           </div>
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            value="Update"
+            disabled={this.state.submitDisabled}
+          />
         </form>
         <div className="edit-links">
           <Link to="/" className="home-link">
