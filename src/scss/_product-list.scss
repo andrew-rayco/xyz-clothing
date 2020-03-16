@@ -5,6 +5,7 @@
 
   .products {
     font-size: 0.9em;
+    margin-bottom: 2em;
 
     a div {
       display: flex;
@@ -26,6 +27,21 @@
       font-size: 0.5em;
       margin-right: 0.5em;
       color: lighten($bodyColor, 30);
+    }
+  }
+
+  button {
+    width: auto;
+    border: 0;
+    background: $secondary;
+    padding: 0.5em;
+    margin: 1em 0;
+    transition: all 0.2s linear;
+
+    &:hover {
+      background: $primary;
+      color: $bgColor;
+      cursor: pointer;
     }
   }
 }

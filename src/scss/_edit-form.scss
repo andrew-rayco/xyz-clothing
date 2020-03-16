@@ -1,0 +1,125 @@
+.edit-form {
+  .form-fields {
+    width: 100%;
+    display: flex;
+
+    .form-left {
+      width: 60%;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .form-fields {
+      flex-direction: column;
+
+      .form-left {
+        width: 100%;
+      }
+
+      .form-right {
+        width: 100%;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+  }
+
+  label {
+    font-weight: 100;
+    color: lighten($bodyColor, 30);
+    margin-bottom: 0.2em;
+  }
+
+  input,
+  textarea {
+    width: 90%;
+    border: 0;
+    padding: 0.5em;
+  }
+
+  input[type='number'] {
+    max-width: 6em;
+  }
+
+  input[type='submit'] {
+    width: auto;
+    border: 0;
+    background: $secondary;
+    padding: 0.5em;
+    margin: 1em 0;
+    transition: all 0.2s linear;
+
+    &:hover {
+      background: $primary;
+      color: $bgColor;
+      cursor: pointer;
+    }
+
+    &:disabled {
+      background: #ddd;
+      color: #bbb;
+      transition: all 0.5s linear;
+
+      &:hover {
+        background: #ddd;
+        color: #bbb;
+      }
+    }
+  }
+
+  .edit-links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // Styles for the react-select component with `classNamePrefix` prop given `rs`
+  // Refer: https://react-select.com/styles#using-classnames
+  .rs-container {
+    width: 120px;
+    border: none;
+    font-size: 0.9em;
+  }
+  .rs__control {
+    // background: $secondary;
+    border: none;
+    border-radius: 0;
+    color: $bodyColor;
+
+    &--is-focused {
+      box-shadow: none;
+    }
+  }
+  .rs__indicator {
+    color: $bodyColor;
+
+    &:hover {
+      color: $primary;
+    }
+
+    &-separator {
+      background-color: $bodyColor;
+    }
+  }
+
+  .error {
+    outline: 2px solid $primary;
+  }
+
+  .error-text {
+    color: $primary;
+  }
+
+  .home-link {
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -25,9 +25,14 @@
     }
   }
 
-  .product-id {
+  .product-id,
+  .edit {
     font-size: 0.8em;
     color: lighten($bodyColor, 30);
+  }
+
+  .edit:hover {
+    color: $primary;
   }
 
   .this-product {

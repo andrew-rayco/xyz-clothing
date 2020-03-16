@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom'
 
 import { calculateLocalPrice } from '../utils'
 
-const ProductList = ({ allProducts, userCurrency }) => {
+const ProductList = ({ allProducts, userCurrency, clearMemory }) => {
   return (
     <div className="product-list">
       <h2>All Products</h2>
       <div className="products">
         {renderProducts(allProducts, userCurrency)}
       </div>
+      <button onClick={() => clearMemory()}>Undo all changes</button>
     </div>
   )
 }
@@ -25,7 +26,11 @@ const renderProducts = (allProducts, userCurrency) => {
           <p>{name}</p>
           <p>
             <span>{userCurrency}</span>
-            {calculateLocalPrice(price.base, price.amount, userCurrency)}
+            {calculateLocalPrice(
+              price.base,
+              parseInt(price.amount),
+              userCurrency
+            )}
           </p>
         </div>
       </Link>
@@ -35,7 +40,8 @@ const renderProducts = (allProducts, userCurrency) => {
 
 ProductList.propTypes = {
   allProducts: PropTypes.array.isRequired,
-  userCurrency: PropTypes.string.isRequired
+  userCurrency: PropTypes.string.isRequired,
+  clearMemory: PropTypes.func.isRequired
 }
 
 export default ProductList
