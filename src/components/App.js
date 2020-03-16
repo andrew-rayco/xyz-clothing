@@ -50,6 +50,11 @@ class App extends Component {
     this.setState({ selectedCurrency: e.value })
   }
 
+  clearMemory = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   render() {
     const { selectedCurrency, products } = this.state
 
@@ -89,6 +94,7 @@ class App extends Component {
                 <ProductList
                   allProducts={products}
                   userCurrency={selectedCurrency}
+                  clearMemory={this.clearMemory}
                 />
               )}
             />

@@ -12,7 +12,7 @@ test('ProductList renders correct amount of products', () => {
       <ProductList
         allProducts={allProducts}
         userCurrency={'USD'}
-        calculateLocalPrice={jest.fn}
+        clearMemory={jest.fn}
       />
     </Router>
   )
