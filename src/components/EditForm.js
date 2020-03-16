@@ -127,7 +127,6 @@ class EditForm extends Component {
           submitDisabled: !isValid
         })
       }
-      console.log('Change detected. State updated ' + name + ' = ' + value)
     } else {
       name = target.name
       value = name === 'id' ? parseFloat(target.value) : target.value
@@ -145,7 +144,6 @@ class EditForm extends Component {
         },
         submitDisabled: !isValid
       })
-      console.log('Change detected. State updated ' + name + ' = ' + value)
     }
   }
 

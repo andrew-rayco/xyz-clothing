@@ -31,6 +31,10 @@
     color: lighten($bodyColor, 30);
   }
 
+  .product-id {
+    margin-top: 1em;
+  }
+
   .edit:hover {
     color: $primary;
   }
