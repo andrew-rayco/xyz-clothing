@@ -33,7 +33,8 @@
     margin-bottom: 1em;
   }
 
-  label {
+  label,
+  .label {
     font-weight: 100;
     color: lighten($bodyColor, 30);
     margin-bottom: 0.2em;
@@ -121,5 +122,9 @@
   .home-link {
     padding: 0;
     margin: 0;
+
+    &:nth-child(2) {
+      align-self: flex-end;
+    }
   }
 }

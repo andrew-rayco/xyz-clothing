@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 import RelatedEdit from './RelatedEdit'
 
-import { calculateLocalPrice } from '../utils'
+import { calculateLocalPrice, validateInput } from '../utils'
 
 const selectOptions = [
   { value: 'AUD', label: 'AUD' },
@@ -79,13 +79,14 @@ class EditForm extends Component {
 
   handleChange(e, selectName) {
     const { target } = e
+    const { allProducts, productId } = this.props
     let name, value
     if (selectName) {
       // Handles select-react output from currency dropdown list
-
+      // or from price-amount
       name = selectName.split('-')[1]
       value = e.value || parseFloat(e.target.value)
-      const isValid = this.validateInput(name, value, this.props.allProducts)
+      const isValid = validateInput(name, value, allProducts, productId)
 
       if (name === 'base') {
         const { base, amount } = this.state.product.price
@@ -131,7 +132,7 @@ class EditForm extends Component {
       name = target.name
       value = name === 'id' ? parseFloat(target.value) : target.value
 
-      const isValid = this.validateInput(name, value, this.props.allProducts)
+      const isValid = validateInput(name, value, allProducts, productId)
 
       this.setState({
         product: {
@@ -144,27 +145,6 @@ class EditForm extends Component {
         },
         submitDisabled: !isValid
       })
-    }
-  }
-
-  validateInput(name, value, allProducts) {
-    // Validate name
-    if (name === 'name') {
-      return value.length >= 3
-
-      // Validate id
-    } else if (name === 'id') {
-      let valid = true
-      allProducts.forEach(prod => {
-        if (prod.id === value && value !== this.props.productId) {
-          valid = false
-        }
-      })
-      return valid
-    } else if (name === 'base') {
-      return value.length > 0
-    } else if (name === 'amount') {
-      return value !== NaN && value > 0
     }
   }
 
@@ -200,6 +180,7 @@ class EditForm extends Component {
                   </p>
                 )}
               </div>
+
               <div className="form-group">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -211,36 +192,33 @@ class EditForm extends Component {
                   rows="3"
                 />
               </div>
+
               <div className="form-group">
-                <label htmlFor="related">Related Products</label>
-                {/* <input
-                  name="related"
-                  type="text"
-                  value={relatedProducts}
-                  onChange={e => this.handleChange(e)}
-                  placeholder="Select related"
-                /> */}
+                <p className="label">Related Products</p>
+                <RelatedEdit
+                  allProducts={this.props.allProducts}
+                  relatedProducts={relatedProducts}
+                />
               </div>
-              <RelatedEdit
-                allProducts={this.props.allProducts}
-                relatedProducts={relatedProducts}
-              />
             </div>
+
             <div className="form-right">
               <div className="form-group">
                 <label htmlFor="price-amount">Price Amount*</label>
                 <input
                   name="price-amount"
                   type="number"
-                  value={price.amount}
+                  value={parseFloat(price.amount).toFixed(2)}
                   onChange={e => this.handleChange(e, 'price-amount')}
                   placeholder="Price amount"
                   className={isValid.price.amount ? '' : 'error'}
+                  step="0.01"
                 />
                 {isValid.price.amount ? null : (
                   <p className="error-text">Free? You crazy?</p>
                 )}
               </div>
+
               <div className="form-group">
                 <label htmlFor="price-amount">Price Base*</label>
                 <Select
@@ -259,6 +237,7 @@ class EditForm extends Component {
                   }
                 />
               </div>
+
               <div className="form-group">
                 <label htmlFor="id">Id*</label>
                 <input
@@ -269,12 +248,12 @@ class EditForm extends Component {
                   placeholder="id"
                   className={isValid.id ? '' : 'error'}
                 />
+                {isValid.id ? (
+                  ''
+                ) : (
+                  <p className="error-text">Id must be unique</p>
+                )}
               </div>
-              {isValid.id ? (
-                ''
-              ) : (
-                <p className="error-text">Id must be unique</p>
-              )}
             </div>
           </div>
           <input

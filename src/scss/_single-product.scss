@@ -16,7 +16,6 @@
 
   .price {
     font-size: 1.8em;
-    margin-top: 0.5em;
 
     span {
       font-size: 0.5em;
@@ -29,14 +28,20 @@
   .edit {
     font-size: 0.8em;
     color: lighten($bodyColor, 30);
+    transition: color 0.15s linear;
   }
 
   .product-id {
     margin-top: 1em;
   }
 
+  .edit span {
+    vertical-align: middle;
+  }
+
   .edit:hover {
     color: $primary;
+    transition: color 0.15s linear;
   }
 
   .this-product {

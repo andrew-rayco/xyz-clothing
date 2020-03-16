@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // localStorage.clear()
     this.setState({
       products: this.getLocalProducts()
     })
@@ -52,7 +51,7 @@ class App extends Component {
 
   clearMemory = () => {
     localStorage.clear()
-    window.location.reload()
+    this.componentDidMount()
   }
 
   render() {

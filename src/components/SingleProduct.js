@@ -23,7 +23,7 @@ const SingleProduct = ({ productId, allProducts, userCurrency }) => {
           <p>{description}</p>
           <p className="product-id">Product # {id}</p>
           <Link className="edit" to={`/products/${productId}/edit`}>
-            Edit this product
+            Edit this product <span>&gt;</span>
           </Link>
         </div>
         <p className="price">
