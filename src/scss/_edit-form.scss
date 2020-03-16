@@ -8,6 +8,25 @@
     }
   }
 
+  @media screen and (max-width: 550px) {
+    .form-fields {
+      flex-direction: column;
+
+      .form-left {
+        width: 100%;
+      }
+
+      .form-right {
+        width: 100%;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+      }
+    }
+  }
+
   .form-group {
     display: flex;
     flex-direction: column;
@@ -97,5 +116,10 @@
 
   .error-text {
     color: $primary;
+  }
+
+  .home-link {
+    padding: 0;
+    margin: 0;
   }
 }

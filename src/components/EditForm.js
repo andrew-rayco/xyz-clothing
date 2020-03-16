@@ -28,7 +28,11 @@ class EditForm extends Component {
       productIndex: '',
       isValid: {
         id: true,
-        name: true
+        name: true,
+        price: {
+          base: true,
+          amount: true
+        }
       },
       submitDisabled: false
     }
@@ -79,6 +83,7 @@ class EditForm extends Component {
 
       name = selectName.split('-')[1]
       value = e.value || parseFloat(e.target.value)
+      const isValid = this.validateInput(name, value, this.props.allProducts)
 
       if (name === 'base') {
         const { base, amount } = this.state.product.price
@@ -99,9 +104,17 @@ class EditForm extends Component {
             ...this.state.product,
             price: {
               ...this.state.product.price,
-              amount: parseFloat(value)
+              amount: parseFloat(value) || ''
             }
-          }
+          },
+          isValid: {
+            ...this.state.isValid,
+            price: {
+              ...this.state.isValid.price,
+              [name]: isValid
+            }
+          },
+          submitDisabled: !isValid
         })
       }
       console.log('Change detected. State updated ' + name + ' = ' + value)
@@ -140,6 +153,10 @@ class EditForm extends Component {
         }
       })
       return valid
+    } else if (name === 'base') {
+      return value.length > 0
+    } else if (name === 'amount') {
+      return value !== NaN && value > 0
     }
   }
 
@@ -206,7 +223,11 @@ class EditForm extends Component {
                   value={price.amount}
                   onChange={e => this.handleChange(e, 'price-amount')}
                   placeholder="Price amount"
+                  className={isValid.price.amount ? '' : 'error'}
                 />
+                {isValid.price.amount ? null : (
+                  <p className="error-text">Free? You crazy?</p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="price-amount">Price Base*</label>

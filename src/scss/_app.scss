@@ -8,13 +8,17 @@ body {
   padding: 2em;
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 550px) {
+    padding: 1em;
+  }
 }
 
 .app {
   background: $bgColor;
   font-family: 'Libre Baskerville', serif;
   color: $bodyColor;
-  width: 90vw;
+  width: 85vw;
   max-width: 800px;
 }
 
