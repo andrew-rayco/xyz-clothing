@@ -25,7 +25,11 @@ const renderProducts = (allProducts, userCurrency) => {
           <p>{name}</p>
           <p>
             <span>{userCurrency}</span>
-            {calculateLocalPrice(price.base, price.amount, userCurrency)}
+            {calculateLocalPrice(
+              price.base,
+              parseInt(price.amount),
+              userCurrency
+            )}
           </p>
         </div>
       </Link>

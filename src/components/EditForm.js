@@ -169,6 +169,11 @@ class EditForm extends Component {
                   className="rs-container"
                   classNamePrefix="rs"
                   name="price-base"
+                  onMenuOpen={() => {
+                    console.log(
+                      'Non-passive violations (in Chrome) courtesy of `react-select` dependency.\nRefer https://github.com/JedWatson/react-select/issues/2729'
+                    )
+                  }}
                 />
               </div>
               <div className="form-group">
