@@ -1,18 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const RelatedEdit = ({ allProducts, relatedProducts }) => {
-  let relatedProductDetails = allProducts.filter(prod => {
-    return relatedProducts.includes(prod.id)
-  })
-
-  return (
-    <div className="related-edit">
-      {renderRelatedProducts(relatedProductDetails)}
-    </div>
-  )
-}
-
 const renderRelatedProducts = relatedProds => {
   return (
     <div className="related-list">
@@ -23,6 +11,18 @@ const renderRelatedProducts = relatedProds => {
           </p>
         )
       })}
+    </div>
+  )
+}
+
+const RelatedEdit = ({ allProducts, relatedProducts }) => {
+  let relatedProductDetails = allProducts.filter(prod => {
+    return relatedProducts.includes(prod.id)
+  })
+
+  return (
+    <div className="related-edit">
+      {renderRelatedProducts(relatedProductDetails)}
     </div>
   )
 }

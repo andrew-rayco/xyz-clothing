@@ -4,15 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { calculateLocalPrice } from '../utils'
 
-const RelatedProducts = ({ relatedProds, userCurrency }) => {
-  return (
-    <div className="related-products">
-      <h3>Related Products</h3>
-      {renderRelatedProds(relatedProds, userCurrency)}
-    </div>
-  )
-}
-
 const renderRelatedProds = (relatedProds, userCurrency) => {
   return relatedProds.map(prod => {
     const { id, name, price } = prod
@@ -29,6 +20,15 @@ const renderRelatedProds = (relatedProds, userCurrency) => {
       </Link>
     )
   })
+}
+
+const RelatedProducts = ({ relatedProds, userCurrency }) => {
+  return (
+    <div className="related-products">
+      <h3>Related Products</h3>
+      {renderRelatedProds(relatedProds, userCurrency)}
+    </div>
+  )
 }
 
 RelatedProducts.propTypes = {
